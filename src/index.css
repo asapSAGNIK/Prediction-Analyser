@@ -1,0 +1,422 @@
+/* ============================================
+   REint Forecast Monitor — Design System
+   ============================================ */
+
+:root {
+  /* Color Palette */
+  --color-bg-primary: #0f1117;
+  --color-bg-secondary: #161922;
+  --color-bg-card: #1c1f2e;
+  --color-bg-input: #232738;
+  --color-border: #2a2e3f;
+  --color-border-focus: #4a7dff;
+
+  --color-text-primary: #e8eaf0;
+  --color-text-secondary: #8b90a0;
+  --color-text-muted: #5c6178;
+
+  /* Chart Colors */
+  --color-actual: #4a9eff;
+  --color-forecast: #34d399;
+  --color-grid: #1e2235;
+
+  /* Accent */
+  --color-accent: #4a7dff;
+  --color-accent-hover: #3a6de8;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15);
+  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+}
+
+/* ============================================
+   Reset & Base
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ============================================
+   App Layout
+   ============================================ */
+
+.app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-lg) var(--space-2xl);
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+.header {
+  margin-bottom: var(--space-xl);
+}
+
+.header__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.header__subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+.header__accent {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* ============================================
+   Controls Card
+   ============================================ */
+
+.controls {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: end;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.control-group__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* DatePicker overrides */
+.control-group .react-datepicker-wrapper {
+  width: 100%;
+}
+
+.control-group .react-datepicker-wrapper input,
+.control-group input[type="text"] {
+  width: 100%;
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.control-group .react-datepicker-wrapper input:focus,
+.control-group input[type="text"]:focus {
+  border-color: var(--color-border-focus);
+}
+
+/* Horizon Slider */
+.horizon-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.horizon-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  min-width: 40px;
+  text-align: right;
+}
+
+.horizon-unit {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--color-bg-input);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  margin-top: var(--space-xs);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-bg-card);
+  box-shadow: 0 0 0 2px var(--color-accent);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-bg-card);
+  box-shadow: 0 0 0 2px var(--color-accent);
+  cursor: pointer;
+}
+
+/* ============================================
+   Chart Card
+   ============================================ */
+
+.chart-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.chart-card__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.chart-card__legend {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.legend-dot--actual {
+  background: var(--color-actual);
+}
+
+.legend-dot--forecast {
+  background: var(--color-forecast);
+}
+
+.chart-container {
+  flex: 1;
+  min-height: 380px;
+}
+
+/* ============================================
+   Custom Tooltip
+   ============================================ */
+
+.custom-tooltip {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+  box-shadow: var(--shadow-elevated);
+}
+
+.custom-tooltip__time {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+  font-weight: 500;
+}
+
+.custom-tooltip__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.8rem;
+  padding: 2px 0;
+}
+
+.custom-tooltip__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.custom-tooltip__label {
+  color: var(--color-text-secondary);
+  min-width: 64px;
+}
+
+.custom-tooltip__value {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   Loading & Status States
+   ============================================ */
+
+.status-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  min-height: 380px;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.status-text {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.error-text {
+  font-size: 0.875rem;
+  color: #f87171;
+  text-align: center;
+  max-width: 400px;
+}
+
+/* ============================================
+   Responsive (Mobile)
+   ============================================ */
+
+@media (max-width: 768px) {
+  .app {
+    padding: var(--space-md) var(--space-md) var(--space-xl);
+  }
+
+  .header__title {
+    font-size: 1.35rem;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    padding: var(--space-md);
+  }
+
+  .chart-card {
+    padding: var(--space-md);
+  }
+
+  .chart-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .chart-container {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header__title {
+    font-size: 1.15rem;
+  }
+
+  .chart-card__legend {
+    gap: var(--space-md);
+  }
+
+  .chart-container {
+    min-height: 250px;
+  }
+}
